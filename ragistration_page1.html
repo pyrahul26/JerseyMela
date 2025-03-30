@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Beautiful Signup</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .register-container {
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            width: 450px;
+            padding: 40px;
+            text-align: center;
+            animation: fadeInUp 0.8s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .register-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+        }
+
+        .logo {
+            width: 70px;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: 600;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #dfe6e9;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s;
+            background-color: #f8f9fa;
+        }
+
+        input:focus {
+            border-color: #3498db;
+            outline: none;
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .terms {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .terms input {
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .terms label {
+            margin-bottom: 0;
+            color: #7f8c8d;
+            font-size: 13px;
+        }
+
+        .terms a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        .register-btn {
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            color: white;
+            border: none;
+            padding: 14px;
+            width: 100%;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 126, 95, 0.3);
+            margin-bottom: 20px;
+        }
+
+        .register-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 126, 95, 0.4);
+        }
+
+        .register-btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .login-link {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+
+        .login-link a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .success-message {
+            display: none;
+            color: #2ecc71;
+            font-size: 14px;
+            margin-top: 15px;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 38px;
+            cursor: pointer;
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <img src="https://via.placeholder.com/70" alt="Logo" class="logo">
+        <h1>Create Your Account</h1>
+        <p class="subtitle">Join our community today</p>
+        
+        <form id="registrationForm">
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" placeholder="Enter your full name">
+                <div class="error-message" id="nameError">Please enter your full name</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" placeholder="Enter your email">
+                <div class="error-message" id="emailError">Please enter a valid email address</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Create a password">
+                <span class="password-toggle" id="togglePassword">Show</span>
+                <div class="error-message" id="passwordError">Password must be at least 8 characters</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" placeholder="Confirm your password">
+                <div class="error-message" id="confirmError">Passwords do not match</div>
+            </div>
+            
+            <div class="terms">
+                <input type="checkbox" id="agreeTerms">
+                <label for="agreeTerms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+            </div>
+            
+            <button type="submit" class="register-btn" id="registerBtn" disabled>Register</button>
+            
+            <div class="success-message" id="successMessage">
+                Registration successful! Redirecting...
+            </div>
+            
+            <div class="login-link">
+                Already have an account? <a href="login.html">Log in</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM Elements
+            const form = document.getElementById('registrationForm');
+            const fullName = document.getElementById('fullName');
+            const email = document.getElementById('email');
+            const password = document.getElementById('password');
+            const confirmPassword = document.getElementById('confirmPassword');
+            const agreeTerms = document.getElementById('agreeTerms');
+            const registerBtn = document.getElementById('registerBtn');
+            const togglePassword = document.getElementById('togglePassword');
+            
+            // Error Elements
+            const nameError = document.getElementById('nameError');
+            const emailError = document.getElementById('emailError');
+            const passwordError = document.getElementById('passwordError');
+            const confirmError = document.getElementById('confirmError');
+            const successMessage = document.getElementById('successMessage');
+            
+            // Password toggle functionality
+            togglePassword.addEventListener('click', function() {
+                const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+                password.setAttribute('type', type);
+                this.textContent = type === 'password' ? 'Show' : 'Hide';
+            });
+            
+            // Form validation
+            function validateForm() {
+                let isValid = true;
+                
+                // Validate full name
+                if (fullName.value.trim() === '') {
+                    nameError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    nameError.style.display = 'none';
+                }
+                
+                // Validate email
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email.value)) {
+                    emailError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    emailError.style.display = 'none';
+                }
+                
+                // Validate password
+                if (password.value.length < 8) {
+                    passwordError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    passwordError.style.display = 'none';
+                }
+                
+                // Validate confirm password
+                if (password.value !== confirmPassword.value) {
+                    confirmError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    confirmError.style.display = 'none';
+                }
+                
+                // Validate terms checkbox
+                if (!agreeTerms.checked) {
+                    isValid = false;
+                }
+                
+                return isValid;
+            }
+            
+            // Enable/disable register button based on form validity
+            function checkFormValidity() {
+                registerBtn.disabled = !validateForm();
+            }
+            
+            // Event listeners for real-time validation
+            fullName.addEventListener('input', checkFormValidity);
+            email.addEventListener('input', checkFormValidity);
+            password.addEventListener('input', checkFormValidity);
+            confirmPassword.addEventListener('input', checkFormValidity);
+            agreeTerms.addEventListener('change', checkFormValidity);
+            
+            // Form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (validateForm()) {
+                    // Simulate successful registration
+                    registerBtn.disabled = true;
+                    successMessage.style.display = 'block';
+                    form.reset();
+                    
+                    // Simulate redirect after 2 seconds
+                    setTimeout(() => {
+                        window.location.href = 'index.html'; 
+                    }, 2000);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

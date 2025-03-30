@@ -1,0 +1,30 @@
+ipl t-shirts description
+
+tshirt -1 - R4999 RCB
+Elevate your athletic style with this blue jersey from Puma. Crafted from polyester, this trendy jersey features half sleeves and a high neck. Team it with a pair of trackpants and sneakers to complete the look.
+
+tshirt -2 - R3999 CSK
+Chennai Super Kings at the MA Chidambaram Stadium. The passion, the pride, the signature yellow hue - now made truly your own. The ’25 CSK match jersey, crafted with premium quality, lets you wear your loyalty in style. Choose to personalise it with your name and number or honour your favorite player by sporting their iconic jersey. Designed on the lines of the players’ kit, this jersey is more than just apparel - it’s a mark of the CSK spirit, worn your way.
+
+tshirt - 3 R2999 MI
+Experience the ultimate fan connection with our Mumbai Indians IPL Fan Edition Jersey, identical to what the stars wear on the field. This collared jersey features official team colors, and authentic gold foil detailing. Elevate your game-day attire with this exclusive, high-performance jersey that lets you feel like a part of the Mumbai Indians lineup. This is a Fan version of the Replica Edition Jersey.
+
+tshirt - 4 R49299 PJBK
+Elevate your match-day experience with the Punjab jersey, crafted for ultimate comfort and style. Made from lightweight embossed fabric with Actiwick technology, it ensures you stay cool, dry, and comfortable throughout the game. The sleek Mandarin collar with golden piping adds a touch of elegance, while the sublimated PBKS logo, tri-color design, and striking golden stripes perfectly replicate the official team jersey.
+
+
+tshirt - 5 KKR
+Forged in bright purple and gold, the new Kolkata Knight Riders jersey is a testament to the team's glorious journey and unbreakable spirit. The design revolves around three-pointed stars, a powerful symbol of KKR's IPL victories in 2012, 2014, and 2024.
+A seamless pattern of these stars flows across the body, reflecting the team's relentless pursuit of excellence. On the shoulders, three prominent three-pointed stars stand tall, celebrating each title-winning year with pride. The side panels feature three large golden stars, surrounded by smaller stars, signifying the team's expanding legacy and unwavering belief in success.
+This jersey isn't just a kit-it's a statement. A tribute to the past, a celebration of the present, and a vision for future triumphs. Korbo, Lorbo, Jeetbo!
+
+tshirt - 6 GT - R1999
+Elevate your cricketing spirit with the playR x Gujarat Titans Cricket Jersey. Crafted for comfort and performance, this jersey is designed to take your game to the next level. Whether you're playing a friendly match with friends or cheering for your favorite team from the stands, this jersey is the perfect choice for all seasons. Made from high-quality polyester fabric, it offers breathability and durability, ensuring you stay cool and comfortable throughout the game. Show your support for the Gujarat Titans with pride and style in this officially licensed 2025 jersey.
+
+tshirt - 7 RR
+In our endeavor to solidify our positioning as India’s Best Talent Academy, both on and off the field, we came up with the idea of partnering with an institution based out of our home state, known for it’s excellence in design, and training the most talented design students across the country.
+We partnered with NIFT (National Institute of Fashion Technology) in Jodhpur to design the IPL 2025 jerseys. This task was taken up by students of NIFT who drew inspiration from the heritage of Rajasthan. The one we’ve chosen to go ahead with draws it’s inspiration from the Motifs present inside the Vijay Stambh (Victory Tower) at Chittorgarh. The Tower, built in 1448, commemorates the victory of Rajput King Rana Kumbha, against the invading Mughal Forces lead by Mahmud Khilji. The Tower represents the spirit of Unity in diversity which was exhibited by the forces lead by the Rajput King against a daunting opponent.
+The motifs found inside the Vijay Stambh, have been arranged into the overlapping triangles formation. They converge to cover all four directions, symbolizing the Royals’ mastery over the field, ensuring no angle of the game is left unexplored. While the motifs and triangles face different ways, as a collectives as they come together as one—diverse in skill yet bound by a single goal: VICTORY.
+
+ tshirt - 8 DC
+Step onto the field with the PUMA x DC 2025 Men's Official Match Jersey. Featuring a vibrant graphic print, colorblock design, and raglan sleeves for ultimate movement, it’s built for performance. Show off your team spirit with the Delhi Capitals crest and gear up to dominate the pitch, wherever you play!

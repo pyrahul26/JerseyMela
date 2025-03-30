@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Payment Gateway</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --success: #4cc9f0;
+            --danger: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --white: #ffffff;
+            --shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #4361ee, #3f37c9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .payment-container {
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            width: 100%;
+            max-width: 450px;
+            overflow: hidden;
+            animation: slideUp 0.5s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .payment-header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: var(--white);
+            padding: 25px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .payment-header h2 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        
+        .payment-header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .payment-body {
+            padding: 25px;
+        }
+        
+        .payment-options {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .payment-option {
+            flex: 1;
+            min-width: 80px;
+            padding: 15px 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            background: var(--light);
+        }
+        
+        .payment-option:hover {
+            border-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .payment-option.active {
+            border-color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.1);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.2);
+        }
+        
+        .payment-option i {
+            font-size: 30px;
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+        
+        .payment-option span {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 14px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            background-color: var(--light);
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+            outline: none;
+        }
+        
+        .form-control::placeholder {
+            color: #adb5bd;
+        }
+        
+        .card-icon {
+            position: absolute;
+            right: 15px;
+            top: 40px;
+            font-size: 20px;
+            color: #adb5bd;
+        }
+        
+        .row {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .row .form-group {
+            flex: 1;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.4);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.5);
+        }
+        
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+        
+        .error-message {
+            color: var(--danger);
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .payment-footer {
+            text-align: center;
+            padding: 15px 25px 25px;
+            font-size: 12px;
+            color: #6c757d;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .payment-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .secure-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        
+        /* Success animation */
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-20px);}
+            60% {transform: translateY(-10px);}
+        }
+        
+        .success-animation {
+            display: none;
+            text-align: center;
+            padding: 30px;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .success-animation i {
+            font-size: 60px;
+            color: #4caf50;
+            margin-bottom: 20px;
+            animation: bounce 1s;
+        }
+        
+        .success-animation h3 {
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .success-animation p {
+            color: #6c757d;
+            margin-bottom: 20px;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="payment-container">
+        <div class="payment-header">
+            <h2>Complete Your Payment</h2>
+            <p>Secure and easy payment process</p>
+        </div>
+        
+        <div class="payment-body">
+            <div class="payment-options">
+                <div class="payment-option active" data-method="card">
+                    <i class="far fa-credit-card"></i>
+                    <span>Card</span>
+                </div>
+                <div class="payment-option" data-method="upi">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>UPI</span>
+                </div>
+                <div class="payment-option" data-method="netbanking">
+                    <i class="fas fa-university"></i>
+                    <span>Net Banking</span>
+                </div>
+                <div class="payment-option" data-method="wallet">
+                    <i class="fas fa-wallet"></i>
+                    <span>Wallet</span>
+                </div>
+            </div>
+            
+            <form id="payment-form">
+                <!-- Card Payment Method -->
+                <div class="payment-method" id="card-method">
+                    <div class="form-group">
+                        <label for="card-number">Card Number</label>
+                        <input type="text" id="card-number" class="form-control" placeholder="1234 5678 9012 3456" maxlength="19">
+                        <i class="far fa-credit-card card-icon"></i>
+                        <div class="error-message" id="card-error">Please enter a valid card number</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="card-name">Name on Card</label>
+                        <input type="text" id="card-name" class="form-control" placeholder="John Doe">
+                        <div class="error-message" id="name-error">Please enter the name on card</div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="expiry-date">Expiry Date</label>
+                            <input type="text" id="expiry-date" class="form-control" placeholder="MM/YY" maxlength="5">
+                            <div class="error-message" id="expiry-error">Please enter a valid expiry date</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="cvv">CVV</label>
+                            <input type="password" id="cvv" class="form-control" placeholder="•••" maxlength="4">
+                            <i class="fas fa-lock card-icon"></i>
+                            <div class="error-message" id="cvv-error">Please enter a valid CVV</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- UPI Payment Method (hidden by default) -->
+                <div class="payment-method" id="upi-method" style="display: none;">
+                    <div class="form-group">
+                        <label for="upi-id">UPI ID</label>
+                        <input type="text" id="upi-id" class="form-control" placeholder="yourname@upi">
+                        <div class="error-message" id="upi-error">Please enter a valid UPI ID</div>
+                    </div>
+                    <p style="font-size: 12px; color: #6c757d; margin-bottom: 15px;">You'll be redirected to your UPI app to complete the payment</p>
+                </div>
+                
+                <!-- Net Banking Method (hidden by default) -->
+                <div class="payment-method" id="netbanking-method" style="display: none;">
+                    <div class="form-group">
+                        <label for="bank-select">Select Bank</label>
+                        <select id="bank-select" class="form-control">
+                            <option value="">-- Select Your Bank --</option>
+                            <option value="sbi">State Bank of India</option>
+                            <option value="hdfc">HDFC Bank</option>
+                            <option value="icici">ICICI Bank</option>
+                            <option value="axis">Axis Bank</option>
+                            <option value="kotak">Kotak Mahindra Bank</option>
+                        </select>
+                        <div class="error-message" id="bank-error">Please select your bank</div>
+                    </div>
+                    <p style="font-size: 12px; color: #6c757d; margin-bottom: 15px;">You'll be redirected to your bank's secure page</p>
+                </div>
+                
+                <!-- Wallet Method (hidden by default) -->
+                <div class="payment-method" id="wallet-method" style="display: none;">
+                    <div class="form-group">
+                        <label for="wallet-select">Select Wallet</label>
+                        <select id="wallet-select" class="form-control">
+                            <option value="">-- Select Wallet --</option>
+                            <option value="paytm">gpay</option>
+                            <option value="phonepe">PhonePe</option>
+                            <option value="amazonpay">Amazon Pay</option>
+                           
+                        </select>
+                        <div class="error-message" id="wallet-error">Please select your wallet</div>
+                    </div>
+                    <p style="font-size: 12px; color: #6c757d; margin-bottom: 15px;">You'll be redirected to your wallet app</p>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" onclick="window.location.href='order_page.html'">
+                    <i class="fas fa-lock"></i> Pay ₹5,999.00
+                </button>
+                
+                <div class="secure-badge">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>100% Secure Payments</span>
+                </div>
+            </form>
+            
+            <!-- Success Message (hidden by default) 
+            <div class="success-animation" id="success-message">
+                <i class="fas fa-check-circle"></i>
+                <h3>Payment Successful!</h3>
+                <p>Your payment of ₹5,999.00 has been processed successfully.</p>
+                <button class="btn btn-primary" onclick="window.location.href='index.html'">
+                    <i class="fas fa-home"></i> 
+                </button> -->
+            
+        </div>
+        
+        <div class="payment-footer">
+            <p>Your payment information is encrypted and secure. <a href="#">Learn more</a></p>
+        </div>
+    </div>
+    
+    <script>
+        // Payment method selection
+        const paymentOptions = document.querySelectorAll('.payment-option');
+        const paymentMethods = document.querySelectorAll('.payment-method');
+        
+        paymentOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                // Remove active class from all options
+                paymentOptions.forEach(opt => opt.classList.remove('active'));
+                // Add active class to clicked option
+                option.classList.add('active');
+                
+                // Hide all payment methods
+                paymentMethods.forEach(method => method.style.display = 'none');
+                
+                // Show selected payment method
+                const method = option.getAttribute('data-method');
+                document.getElementById(`${method}-method`).style.display = 'block';
+            });
+        });
+        
+        // Card number formatting
+        const cardNumber = document.getElementById('card-number');
+        cardNumber.addEventListener('input', function(e) {
+            // Remove all non-digit characters
+            let value = this.value.replace(/\D/g, '');
+            
+            // Add space after every 4 digits
+            let formattedValue = '';
+            for (let i = 0; i < value.length; i++) {
+                if (i > 0 && i % 4 === 0) {
+                    formattedValue += ' ';
+                }
+                formattedValue += value[i];
+            }
+            
+            this.value = formattedValue;
+        });
+        
+        // Expiry date formatting
+        const expiryDate = document.getElementById('expiry-date');
+        expiryDate.addEventListener('input', function(e) {
+            // Remove all non-digit characters
+            let value = this.value.replace(/\D/g, '');
+            
+            // Add slash after 2 digits
+            if (value.length > 2) {
+                value = value.substring(0, 2) + '/' + value.substring(2, 4);
+            }
+            
+            this.value = value;
+        });
+        
+        // Form validation and submission
+        const paymentForm = document.getElementById('payment-form');
+        paymentForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get active payment method
+            const activeOption = document.querySelector('.payment-option.active');
+            const activeMethod = activeOption.getAttribute('data-method');
+            
+            let isValid = true;
+            
+            // Validate based on active method
+            if (activeMethod === 'card') {
+                // Card validation
+                const cardNumberValue = cardNumber.value.replace(/\s/g, '');
+                const cardName = document.getElementById('card-name').value.trim();
+                const expiryValue = expiryDate.value;
+                const cvvValue = document.getElementById('cvv').value;
+                
+                // Validate card number (16 digits)
+                if (!/^\d{16}$/.test(cardNumberValue)) {
+                    document.getElementById('card-error').style.display = 'block';
+                    cardNumber.style.borderColor = 'var(--danger)';
+                    isValid = false;
+                } else {
+                    document.getElementById('card-error').style.display = 'none';
+                    cardNumber.style.borderColor = '';
+                }
+                
+                // Validate card name
+                if (cardName === '') {
+                    document.getElementById('name-error').style.display = 'block';
+                    document.getElementById('card-name').style.borderColor = 'var(--danger)';
+                    isValid = false;
+                } else {
+                    document.getElementById('name-error').style.display = 'none';
+                    document.getElementById('card-name').style.borderColor = '';
+                }
+                
+                // Validate expiry date (MM/YY format)
+                if (!/^\d{2}\/\d{2}$/.test(expiryValue)) {
+                    document.getElementById('expiry-error').style.display = 'block';
+                    expiryDate.style.borderColor = 'var(--danger)';
+                    isValid = false;
+                } else {
+                    document.getElementById('expiry-error').style.display = 'none';
+                    expiryDate.style.borderColor = '';
+                }
+                
+                // Validate CVV (3 or 4 digits)
+                if (!/^\d{3,4}$/.test(cvvValue)) {
+                    document.getElementById('cvv-error').style.display = 'block';
+                    document.getElementById('cvv').style.borderColor = 'var(--danger)';
+                    isValid = false;
+                } else {
+                    document.getElementById('cvv-error').style.display = 'none';
+                    document.getElementById('cvv').style.borderColor = '';
+                }
+            } 
+            else if (activeMethod === 'upi') {
+                // UPI validation
+                const upiId = document.getElementById('upi-id').value.trim();
+                if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9]+$/.test(upiId)) {
+                    document.getElementById('upi-error').style.display = 'block';
+                    document.getElementById('upi-id').style.borderColor = 'var(--danger)';
+                    isValid = false;
+                } else {
+                    document.getElementById('upi-error').style.display = 'none';
+                    document.getElementById('upi-id').style.borderColor = '';
+                }
+            }
+            else if (activeMethod === 'netbanking') {
+                // Net banking validation
+                const bankSelect = document.getElementById('bank-select').value;
+                if (bankSelect === '') {
+                    document.getElementById('bank-error').style.display = 'block';
+                    document.getElementById('bank-select').style.borderColor = 'var(--danger)';
+                    isValid = false;
+                } else {
+                    document.getElementById('bank-error').style.display = 'none';
+                    document.getElementById('bank-select').style.borderColor = '';
+                }
+            }
+            else if (activeMethod === 'wallet') {
+                // Wallet validation
+                const walletSelect = document.getElementById('wallet-select').value;
+                if (walletSelect === '') {
+                    document.getElementById('wallet-error').style.display = 'block';
+                    document.getElementById('wallet-select').style.borderColor = 'var(--danger)';
+                    isValid = false;
+                } else {
+                    document.getElementById('wallet-error').style.display = 'none';
+                    document.getElementById('wallet-select').style.borderColor = '';
+                }
+            }
+            
+            // If all validations pass
+            if (isValid) {
+                // Hide form and show success message
+                paymentForm.style.display = 'none';
+                document.getElementById('success-message').style.display = 'block';
+                
+                // In a real application, you would process the payment here
+                console.log('Payment processing for method:', activeMethod);
+            }
+        });
+    </script>
+</body>
+</html>

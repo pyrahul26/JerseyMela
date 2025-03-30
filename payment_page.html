@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --success: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --white: #ffffff;
+            --shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #4361ee, #3f37c9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .confirmation-container {
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            width: 100%;
+            max-width: 500px;
+            overflow: hidden;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .confirmation-header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: var(--white);
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .checkmark {
+            width: 80px;
+            height: 80px;
+            background-color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px;
+            animation: bounceIn 0.5s ease-in-out;
+        }
+
+        .checkmark i {
+            color: var(--success);
+            font-size: 3rem;
+        }
+
+        .confirmation-header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .confirmation-header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .confirmation-body {
+            padding: 25px;
+        }
+
+        .order-details {
+            margin-bottom: 25px;
+        }
+
+        .order-details h2 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 8px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px dashed #eee;
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .detail-value {
+            color: #555;
+        }
+
+        .order-summary {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 25px;
+        }
+
+        .order-summary h2 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .summary-total {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid var(--primary);
+        }
+
+        .confirmation-footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-top: 1px solid #eee;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(67, 97, 238, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            box-shadow: none;
+            margin-left: 15px;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        @media (max-width: 480px) {
+            .confirmation-header {
+                padding: 20px;
+            }
+            
+            .confirmation-header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .btn {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            
+            .btn-outline {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="confirmation-container">
+        <div class="confirmation-header">
+            <div class="checkmark">
+                <i class="fas fa-check"></i>
+            </div>
+            <h1>Payment Successful!</h1>
+            <p>Thank you for your purchase. Your order has been confirmed.</p>
+        </div>
+
+        <div class="confirmation-body">
+            <div class="order-details">
+                <h2>Order Details</h2>
+                <div class="detail-row">
+                    <span class="detail-label">Order Number</span>
+                    <span class="detail-value" id="order-number"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Date</span>
+                    <span class="detail-value" id="order-date"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Payment Method</span>
+                    <span class="detail-value" id="payment-method"></span>
+                </div>
+            </div>
+
+            <div class="order-summary">
+                <h2>Order Summary</h2>
+                <div class="summary-item" id="order-items">
+                    <!-- Items will be inserted here by JavaScript -->
+                </div>
+                <div class="summary-item summary-total">
+                    <span>Total</span>
+                    <span id="order-total"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="confirmation-footer">
+            <button class="btn" id="download-btn">
+                <i class="fas fa-download"></i> Download Invoice
+            </button>
+            <button class="btn btn-outline" id="back-btn">
+                <i class="fas fa-home"></i> Back to Home
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get order data from session storage
+            const orderData = JSON.parse(sessionStorage.getItem('orderData'));
+            
+            if (orderData) {
+                // Populate order details
+                document.getElementById('order-number').textContent = orderData.orderId;
+                document.getElementById('order-date').textContent = orderData.date;
+                document.getElementById('payment-method').textContent = formatPaymentMethod(orderData.paymentMethod);
+                document.getElementById('order-total').textContent = orderData.total;
+                
+                // Populate order items
+                const itemsContainer = document.getElementById('order-items');
+                orderData.items.forEach(item => {
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'summary-item';
+                    itemElement.innerHTML = `
+                        <span>${item.name}</span>
+                        <span>${item.price}</span>
+                    `;
+                    itemsContainer.appendChild(itemElement);
+                });
+            } else {
+                // If no order data found (direct access to page)
+                document.getElementById('order-number').textContent = '#ORD-000000';
+                document.getElementById('order-date').textContent = new Date().toLocaleDateString();
+                document.getElementById('payment-method').textContent = 'Credit Card';
+                document.getElementById('order-total').textContent = '₹0.00';
+            }
+            
+            // Button event listeners
+            document.getElementById('download-btn').addEventListener('click', function() {
+                alert('Invoice will be generated and downloaded. Thank you!');
+            });
+            
+            document.getElementById('back-btn').addEventListener('click', function() {
+                window.location.href = 'index.html';
+            });
+        });
+        
+        function formatPaymentMethod(method) {
+            const methodNames = {
+                'card': 'Credit/Debit Card',
+                'upi': 'UPI Payment',
+                'netbanking': 'Net Banking',
+                'wallet': 'Digital Wallet'
+            };
+            return methodNames[method] || method;
+        }
+    </script>
+</body>
+</html>
